@@ -1,6 +1,6 @@
 # kOptional
 
-[ ![Download](https://api.bintray.com/packages/step-89-g/stepango/kOptional/images/download.svg?version=1.0.1) ](https://bintray.com/step-89-g/stepango/kOptional/1.0.1/link)
+[ ![Download](https://api.bintray.com/packages/step-89-g/stepango/kOptional/images/download.svg?version=1.0.1) ](https://bintray.com/step-89-g/stepango/kOptional/1.0.1/link)[![codebeat badge](https://codebeat.co/badges/7a9c63ff-cae7-455b-bca6-8d68880c6907)](https://codebeat.co/projects/github-com-stepango-koptional)
 
 Java8 Optional back-port for Kotlin and Android
 
