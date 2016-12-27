@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/:License-Apache 2.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-kOptional-brightgreen.svg?style=flat)]()
 
-Extended Java8 `Optional` back-port for Kotlin and Android
+Extended Java8 `Optional` Kotlin back-port for Android and JVM
 
 Add kOptional to your `build.gradle`
 ```
