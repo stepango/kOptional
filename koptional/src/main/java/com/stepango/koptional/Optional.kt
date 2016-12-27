@@ -45,6 +45,15 @@ sealed class Optional<T : Any>(
     inline fun ifPresent(consumer: (T) -> Unit) = apply { value?.let { consumer(value) } }
 
     /**
+     * If a value is not present, invoke the specified action,
+     * otherwise do nothing.
+     *
+     * @param action block to be executed if a value is not present
+     * @return current [Optional] instance
+     */
+    inline fun ifEmpty(action: () -> Unit) = apply { if (!isPresent) action() }
+
+    /**
      * If a value is present, and the value matches the given predicate,
      * return an [Optional] describing the value, otherwise return an
      * empty [Optional].
