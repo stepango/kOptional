@@ -32,8 +32,7 @@ sealed class Optional<T : Any>(
     /**
      * @return `true` if there is a value present, otherwise `false`
      */
-    val isPresent: Boolean
-        get() = value != null
+    val isPresent: Boolean get() = value != null
 
     /**
      * If a value is present, invoke the specified consumer with the value,
@@ -42,16 +41,7 @@ sealed class Optional<T : Any>(
      * @param consumer block to be executed if a value is present
      * @return current [Optional] instance
      */
-    inline fun ifPresent(consumer: (T) -> Unit) = apply { value?.let { consumer(value) } }
-
-    /**
-     * If a value is not present, invoke the specified action,
-     * otherwise do nothing.
-     *
-     * @param action block to be executed if a value is not present
-     * @return current [Optional] instance
-     */
-    inline fun ifEmpty(action: () -> Unit) = apply { if (!isPresent) action() }
+    inline fun ifPresent(consumer: (T) -> Unit) = apply { if (isPresent) consumer(get()) }
 
     /**
      * If a value is present, and the value matches the given predicate,
@@ -64,7 +54,7 @@ sealed class Optional<T : Any>(
      * otherwise an empty [Optional]
      */
     inline fun filter(predicate: (T) -> Boolean): Optional<T>
-            = value?.let { if (predicate(it)) this else empty<T>() } ?: this
+            = if (isPresent && predicate(get())) this else empty<T>()
 
     /**
      * If a value is present, apply the provided mapping function to it,
@@ -94,8 +84,8 @@ sealed class Optional<T : Any>(
      * otherwise an empty [Optional]
      * @throws NullPointerException if the mapping function is null
      */
-    inline fun <U : Any> map(mapper: (T) -> U): Optional<U>
-            = value?.let { ofNullable(mapper(it)) } ?: empty<U>()
+    inline fun <U : Any> map(mapper: (T) -> U?): Optional<U>
+            = if (isPresent) ofNullable(mapper(get())) else empty<U>()
 
     /**
      * If a value is present, apply the provided [Optional]-bearing
@@ -115,7 +105,7 @@ sealed class Optional<T : Any>(
      * a null result
      */
     inline fun <U : Any> flatMap(mapper: (T) -> Optional<U>): Optional<U>
-            = value?.let { mapper(it) } ?: empty<U>()
+            = if (isPresent) mapper(get()) else empty<U>()
 
     /**
      * @param other the value to be returned if there is no value present, may
@@ -131,7 +121,7 @@ sealed class Optional<T : Any>(
      * @throws NullPointerException if value is not present and [other] is
      * null
      */
-    fun orElseGet(other: () -> T): T = value ?: other()
+    inline fun orElseGet(other: () -> T): T = if (isPresent) get() else other()
 
     /**
      * Return the contained value, if present, otherwise throw an exception
@@ -144,7 +134,7 @@ sealed class Optional<T : Any>(
      * @throws X if there is no value present
      */
     inline fun <X : Throwable> orElseThrow(exceptionSupplier: () -> X): T
-            = value ?: throw exceptionSupplier()
+            = if (isPresent) get() else throw exceptionSupplier()
 
     /**
      * Indicates whether some other object is "equal to" this Optional. The
@@ -213,6 +203,15 @@ sealed class Optional<T : Any>(
     }
 
 }
+
+/**
+ * If a value is not present, invoke the specified action,
+ * otherwise do nothing.
+ *
+ * @param action block to be executed if a value is not present
+ * @return current [Optional] instance
+ */
+inline fun Optional<out Any>.ifEmpty(action: () -> Unit) = apply { if (!isPresent) action() }
 
 fun <T : Any> T?.toOptional() = Optional.ofNullable(this)
 
