@@ -17,7 +17,7 @@ class MainActivity : Activity() {
                 .mapIndexed { i, optional -> optional.ifEmpty { Log.e("kOptional", "$i element is null, it's bad") } }
                 .map { it.map { "$it is not null " } }
                 .fold(StringBuffer()) { buffer, os ->
-                    buffer.apply { os.ifPresent { buffer.append("$it\n") } }
+                    buffer.apply { os.ifPresent { append("$it\n") } }
                 }
 
     }
