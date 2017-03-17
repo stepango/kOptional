@@ -1,6 +1,6 @@
 # kOptional
 
-[![Download](https://api.bintray.com/packages/step-89-g/stepango/kOptional/images/download.svg?version=1.1.0) ](https://bintray.com/step-89-g/stepango/kOptional/1.1.0/link)
+[![Download](https://api.bintray.com/packages/step-89-g/stepango/kOptional/images/download.svg?version=latest)](https://bintray.com/step-89-g/stepango/kOptional/)
 [![codebeat badge](https://codebeat.co/badges/7a9c63ff-cae7-455b-bca6-8d68880c6907)](https://codebeat.co/projects/github-com-stepango-koptional)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-kOptional-brightgreen.svg?style=flat)]()
@@ -9,7 +9,7 @@ Extended Java8 `Optional` Kotlin back-port for Android and JVM
 
 Add kOptional to your `build.gradle`
 ```
-compile "com.stepango.koptional:koptional:1.1.0"
+compile "com.stepango.koptional:koptional:1.2.0"
 ```
 
 Usage example:
